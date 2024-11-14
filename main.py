@@ -85,7 +85,7 @@ def start_game():
         p_data = title_menu_choice()
         waiting_player = True
         is_boss_dead = False
-        while p_data.hp > 0 and not is_boss_dead and waiting_player and p_data is not None:
+        while p_data is not None and p_data.hp > 0 and not is_boss_dead and waiting_player and p_data is not None:
             show_action_menu()
 
             p_data.show_position(map, biome)
@@ -112,7 +112,6 @@ def start_game():
                         print("Wow you got a " + biome[map[p_data.y][p_data.x]]["Encounter"][random_potion+1].name)
                 if biome[map[p_data.y][p_data.x]]["name"] == "Boss Tower":
                     is_boss_dead = p_data.start_fight(boss_data)
-                    print("Congrats you beat the boss! You will be back to the main menu")
                     sleep(3)
             elif user_action in ["5", "6"]:
                 if user_action == "5":
@@ -120,7 +119,6 @@ def start_game():
                     print()
                     print(">> Inventory <<")
                     p_data.show_inventory(False)
-                    sleep(1)
                 if user_action == "6":
                     save_data(p_data)
                     waiting_player = False

@@ -66,7 +66,7 @@ class Player(Entity):
         if monster.level < self.level:
             monster.level_up()
 
-        while fight_toggle:
+        while fight_toggle and self.hp > 0:
             player_turn = True
             player_action = 0
             while player_turn:
@@ -103,8 +103,9 @@ class Player(Entity):
                 monster.hp = monster.max_hp
                 if self.experience / 7 > self.level:
                     self.level_up()
-
                 return True
+            if self.hp <= 0:
+                print("You died, you will be back to the main menu.")
             self.take_damage(monster)
             self.defense = self.default_defense
             self.attack = self.default_attack
@@ -121,7 +122,6 @@ class Player(Entity):
 
         else:
             print("Your inventory is empty")
-            sleep(3)
 
     def level_up(self):
         self.level += 1
